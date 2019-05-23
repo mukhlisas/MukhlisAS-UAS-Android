@@ -45,39 +45,36 @@ public class MainActivity extends AppCompatActivity {
         String link = "https://http://192.168.5.75/nama.json";
 
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, link,
-                null, new Response.Listener<JSONObject>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(JSONArray response) {
                 try {
-                    JSONArray jsonArray = response.getJSONArray("0");
+                    JSONObject data = response.getJSONObject(id);
+                    String id = data.getString("id");
+                    String nama= data.getString("nama");
+                    String asal_daerah = data.getString("asal_daerah");
+                    String kamar = data.getString("kamar");
 
-                    for (int i =0; i < jsonArray.length(); i++){
+                    textHasilJSON.append("ID = "+id+"\n"+"Nama = "+nama+"\n"+"Asal Daerah = "
+                            +asal_daerah+"\n"+"Kamar = "+kamar+"\n\n");
 
-                        JSONObject anggota = jsonArray.getJSONObject(i);
-
-                        String id = anggota.getString("id");
-                        String nama = anggota.getString("nama");
-                        String asalDaerah = anggota.getString("asal_daerah");
-                        String Kamar = anggota.getString("kamar");
-
-
-                        textHasilJSON.append(id+ ". " + nama + ", "
-                                + asalDaerah + ", " + Kamar + " \n\n");
-                    }
                 }catch (JSONException e){
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(),"Error1", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                 }
-               }
-     }, new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            error.printStackTrace();
-            Toast.makeText(getApplicationContext(),"Error1", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+            }
 
-        }
-    });
+        });
+
         mQueue.add(request);
-}
+
+    }
+
 }
