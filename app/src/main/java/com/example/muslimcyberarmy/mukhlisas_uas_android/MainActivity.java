@@ -52,19 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONArray jsonArray = response.getJSONArray("");
 
-                    for (int i =0; i < jsonArray.length(); i++){
-
-                        JSONObject anggota = jsonArray.getJSONObject(i);
-
-                        String id = anggota.getString("id");
-                        String nama = anggota.getString("nama");
-                        String asalDaerah = anggota.getString("asal_daerah");
-                        String Kamar = anggota.getString("kamar");
-
-
-                        textHasilJSON.append(id+ ". " + nama + ", "
-                                + asalDaerah + ", " + Kamar + " \n\n");
-                    }
+                    
                 }catch (JSONException e){
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(),"Error1", Toast.LENGTH_SHORT).show();
