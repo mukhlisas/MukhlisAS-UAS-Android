@@ -11,6 +11,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -41,11 +42,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void uraiJSON (){
+    private void uraiJSON (final int id){
         String link = "https://http://192.168.5.75/nama.json";
 
-
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, link, null, new Response.Listener<JSONArray>() {
 
             @Override
             public void onResponse(JSONArray response) {
